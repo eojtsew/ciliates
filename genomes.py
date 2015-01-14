@@ -65,10 +65,12 @@ class Genome:
         zygote = Genome(self.L,(self.P + other.P),diploid_k)
         return zygote
     
-    # make this work for odd numbers... like 45...    
-    def set_ploidy(self,new_p):
-        """only diploid to polyploid"""
-        new_k = self.K*(new_p/self.P)
+    
+    def make_mac(self,new_p):
+        """"""
+        prob = self.K.astype('float')/self.P
+        new_k = np.random.binomial(new_p,prob)
+        self.K = new_k
         
         
     def fitness(self,s,h=0.5):
@@ -98,6 +100,14 @@ class Ciliate:
         daughter.somatic = new_soma
         return daughter
         
-    def sex(self,other):
+    def GE(self):
         """"""
+        
+        
+    def fitness(self,s,h=0.5):
+        """"""
+        return self.somatic.fitness(s,h)
+        
+class Population(ndarray):
+    """"""
         
